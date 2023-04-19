@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio - Javascript</title>
+</head>
+<body style="font-family: 'Tahoma';">
+
+    <h1>Calculadora Web</h1>
+    <table>
+        <tr>
+            <td>Valor 1</td>
+            <td><input type="number" name="txtValorUno" id="txtValorUno"></td>
+        </tr>
+        <tr>
+            <td>Valor 2</td>
+            <td><input type="number" name="txtValorDos" id="txtValorDos"></td>
+        </tr>
+        <tr>
+            <td>Operacin</td>
+            <td>
+                <select name="ddlOperacion" id="ddlOperacion">
+                    <option value="+">Sumar</option>
+                    <option value="-">Restar</option>
+                    <option value="/">Dividir</option>
+                    <option value="*">Multiplicar</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Resultado</td>
+            <td><input type="number" name="txtResultado" id="txtResultado" readonly></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="button" value="Calcular" onclick="calcular();"></td>
+        </tr>
+    </table>
+    
+    <script>
+
+        function calcular(){
+            if(validarFormulario()){
+                var operacion = document.getElementById("ddlOperacion").value;
+                var resultado = calcularSegunOperacion(operacion);
+                
+                document.getElementById("txtResultado").value = resultado;
+            }
+        }
+
+        function validarFormulario(){
+            var valido = true;
+            var valorUno = document.getElementById("txtValorUno");
+            var valorDos = document.getElementById("txtValorDos");
+
+            if(valorUno.value == ""){
+                alert("Favor ingresar un número al texto Valor 1");
+                valorUno.focus();
+                valido = false;
+                return valido;
+            }
+            
+            if(valorDos.value == ""){
+                alert("Favor ingresar un número al texto Valor 2");
+                valorDos.focus();
+                valido = false;
+                return valido;
+            }
+
+            return valido;
+        }
+
+        function calcularSegunOperacion(operacionAritmetica){
+            var numeroUno = parseInt(document.getElementById("txtValorUno").value);
+            var numeroDos = parseInt(document.getElementById("txtValorDos").value);
+            var resultado = 0;
+
+            switch(operacionAritmetica){
+                case '+':
+                    resultado = numeroUno + numeroDos;
+                    break;
+                case '-':
+                    resultado = numeroUno - numeroDos;
+                    break;
+                case '/':
+                    resultado = numeroUno / numeroDos;
+                    break;
+                case '*':
+                    resultado = numeroUno * numeroDos;
+                    break;
+            }
+            return resultado;
+        }
+                    
+    </script>
+</body>
+</html>
